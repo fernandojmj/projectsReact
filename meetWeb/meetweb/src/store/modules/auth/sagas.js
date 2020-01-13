@@ -1,16 +1,17 @@
 import { all, takeLatest, call, put } from "redux-saga/effects";
 
 import history from "~/services/history";
-
+import api from "~/services/api";
 import { signInSuccess } from "./actions";
 
 export function* signIn({ payload }) {
   const { email, password } = payload;
-  // const response = ''; //chamar a api
+  console.log(email);
+  console.log(password);
+  //chamando a API para realizar autenticação
+  const response = yield call(api.post, "sessions", email, password);
 
-  const token = "asdasdasdasda";
-  const user = " Fernando";
-
+  const { token, user } = response.data;
   console.tron.log("Entrou no signIn");
   yield put(signInSuccess(token, user));
 
