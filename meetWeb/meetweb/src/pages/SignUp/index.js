@@ -1,5 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
+import { signUpRequest } from "~/store/modules/auth/actions";
 
 // import { Container } from './styles';
 import logo from "~/assets/logo.png";
@@ -17,8 +20,11 @@ const schema = Yup.object().shape({
 });
 
 export default function SignUp() {
-  function handleSubmit(data) {
-    console.tron.log(data);
+  const loading = useSelector(state => state.auth.loading);
+  const dispatch = useDispatch();
+
+  function handleSubmit({ name, email, password }) {
+    dispatch(signUpRequest(name, email, password));
   }
 
   return (
@@ -33,7 +39,7 @@ export default function SignUp() {
           type="password"
           placeholder="senha secreta"
         ></Input>
-        <button type="submit">Acessar</button>
+        <button type="submit">{loading ? "carregando..." : "Cadastrar"}</button>
         <Link to="/">Já tenho uma conta</Link>
       </Form>
     </>
