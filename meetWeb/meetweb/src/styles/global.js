@@ -35,4 +35,9 @@ html,body, #root{
     list-style : none;
   }
 
+  img{
+    align-items: center;
+    height: 200px;
+  }
+
 `;

@@ -9,16 +9,19 @@ export default function user(state = INITTIAL_STATE, action) {
     case "@auth/SIGN_IN_SUCCESS":
       return produce(state, draft => {
         draft.profile = action.payload.user;
-        console.tron.log(draft.profile);
       });
     case "@user/UPDATE_PROFILE_SUCCESS":
       return produce(state, draft => {
         draft.profile = action.payload.profile;
-        console.tron.log(draft.profile);
       });
 
     case "@user/UPDATE_PROFILE_FAILURE":
       return produce(state, draft => {});
+
+    case "@auth/SIGN_OUT":
+      return produce(state, draft => {
+        draft.profile = null;
+      });
 
     default:
       return state;

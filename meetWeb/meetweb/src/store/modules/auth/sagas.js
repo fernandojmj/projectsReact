@@ -16,7 +16,7 @@ export function* signIn({ payload }) {
     const { token, user } = response.data;
     console.tron.log("Entrou no signIn");
     console.tron.log(user);
-    api.defaults.headers.Authorization = `Bearer ${token}`;
+    api.defaults.headers.Authorization = `Bearer ${token.token}`;
     yield put(signInSuccess(token, user));
 
     history.push("/dashboard");
@@ -30,29 +30,37 @@ export function* signup({ payload }) {
   try {
     console.tron.log("Cadastranto usuario..");
     yield call(api.post, "users", payload);
-    toast.info("Cadastrado com sucesso!");
+    toast.success("Cadastrado com sucesso!");
     history.push("/");
-  } catch {
-    toast.error("Falha no cadastro!");
+  } catch (error) {
+    toast.error("Falha no cadastro. Tente mais tarde!");
     yield put(signFailure());
   }
 }
 
 export function setToken({ payload }) {
   console.tron.log("ENTROU REHYDRATE ");
-  // if (!payload) return;
+  if (!payload) return;
 
-  // const { token } = payload.auth;
+  const { token } = payload.auth;
+  const objToken = token;
 
-  // if (token) {
-  //   console.tron.log("adicionou token headers ");
-  //   api.defaults.headers.Authorization = `Bearer ${token}`;
-  //   console.tron.log(token);
-  // }
+  if (objToken) {
+    console.tron.log(objToken.token);
+    console.tron.log("adicionou token headers ");
+    api.defaults.headers.Authorization = `Bearer ${objToken.token}`;
+    console.tron.log(objToken.token);
+  }
+}
+
+export function signOut() {
+  api.defaults.headers.Authorization = ``;
+  history.push("/");
 }
 
 export default all([
   takeLatest("persist/REHYDRATE", setToken),
   takeLatest("@auth/SIGN_IN_REQUEST", signIn),
-  takeLatest("@auth/SIGN_UP_REQUEST", signup)
+  takeLatest("@auth/SIGN_UP_REQUEST", signup),
+  takeLatest("@auth/SIGN_OUT", signOut)
 ]);

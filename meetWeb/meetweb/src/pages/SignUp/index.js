@@ -29,7 +29,7 @@ export default function SignUp() {
 
   return (
     <>
-      <img src={logo} alt="Go Barber" />
+      <img src={logo} alt="Meet App" />
 
       <Form schema={schema} onSubmit={handleSubmit}>
         <Input name="name" placeholder="Nome Completo"></Input>

@@ -24,7 +24,19 @@ export const Container = styled.div`
       height: 44px;
       padding: 0 15px;
       color: #fff;
-      margin: 0 0 10px;
+      margin: 0 0 20px;
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.7);
+      }
+    }
+    textarea {
+      background: rgb(0, 0, 0, 0.1);
+      border: 0;
+      border-radius: 4px;
+      height: 300px;
+      padding: 10px 15px;
+      color: #fff;
+      margin: 0 0 20px;
       &::placeholder {
         color: rgba(255, 255, 255, 0.7);
       }
@@ -72,3 +84,16 @@ export const Container = styled.div`
     }
   }
 `;
+
+// export const TextField = styled.text`
+//   background: rgb(0, 0, 0, 0.1);
+//   border: 0;
+//   border-radius: 4px;
+//   height: 100px;
+//   padding: 0 50px;
+//   color: #fff;
+//   margin: 0 0 10px;
+//   &::placeholder {
+//     color: rgba(255, 255, 255, 0.7);
+//   }
+// `;

@@ -4,7 +4,7 @@ import { Container } from "./styles";
 import { useDispatch, useSelector } from "react-redux";
 import { Form, Input } from "@rocketseat/unform";
 import { updateProfileRequest } from "~/store/modules/user/actions";
-
+import { signOut } from "~/store/modules/auth/actions";
 // import logo from "~/assets/logo.png";
 import * as Yup from "yup";
 
@@ -12,21 +12,25 @@ const schema = Yup.object().shape({
   email: Yup.string()
     .email("E-mail invalido")
     .required("E-mail obrigatorio"),
-  username: Yup.string().required("Nome Completo obrigatório")
+  username: Yup.string().required("Nome Completo obrigatório"),
+  password_old: Yup.string().required("Campo Obrigatório"),
+  password: Yup.string().required("Campo Obrigatório"),
+  confirmPassword: Yup.string().required("Campo Obrigatório")
 });
 
 export default function Profile() {
   // const loading = useSelector(state => state.auth.loading);
   let profile = useSelector(state => state.user.profile);
-  profile.password_old = "";
-  profile.confirmPassword = "";
   console.tron.log(profile);
-
+  profile.password = "";
   const dispatch = useDispatch();
 
   function handleSubmit(data) {
     console.tron.log(data);
     dispatch(updateProfileRequest(data));
+  }
+  function handleSignOut() {
+    dispatch(signOut());
   }
   return (
     <Container>
@@ -41,7 +45,7 @@ export default function Profile() {
         <hr />
         <Input
           name="password_old"
-          // type="password"
+          type="password"
           placeholder="senha Atual"
         ></Input>
         <Input name="password" type="password" placeholder="Nova Senha"></Input>
@@ -53,7 +57,6 @@ export default function Profile() {
 
         <button type="submit">Atualizar Perfil</button>
       </Form>
-      <button type="button">Sair</button>
     </Container>
   );
 }
