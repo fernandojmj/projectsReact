@@ -9,7 +9,7 @@ export default function Notifications() {
 
   function handleToggleVisible() {
     setVisible(!visible);
-    console.log(visible);
+    // console.log(visible);
   }
 
   return (
