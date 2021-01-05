@@ -5,7 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^4.9.2",
     "@rocketseat/unform": "^1.6.1",
-    "axios": "^0.19.1",
+    "axios": "^0.21.1",
     "babel-plugin-root-import": "^6.4.1",
     "date-fns": "^2.9.0",
     "formik": "^2.1.4",
